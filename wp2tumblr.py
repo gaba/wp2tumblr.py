@@ -96,7 +96,7 @@ def main():
     
     for post in posts:
         if not check_progress(post['slug']):
-            pattern = re.compile('''(http://karteek.selfdabba.com/wp-content/uploads/[\w\_\-\.\/]+)''')
+            pattern = re.compile('''(http://YOUR-WORDPRESS-URL\.COM/wp-content/uploads/[\w\_\-\.\/]+)''')
             # Change the pattern for your requirement
             links = list(set(pattern.findall(post['content'])))
             _photo_posts = []
@@ -140,7 +140,7 @@ def main():
             _url = BASEURL + str(post['tumblr_id']) + "/" + post['slug']
             
             if len(post['comments']) > 0:
-                t = d.thread_by_identifier(post['title'], post['tumblr_id'])
+                t = d.thread_by_identifier(post['tumblr_id'], post['title'])
                 d.update_thread(t['thread']['id'],{'title':post['title'], 'slug':post['slug'], 'url':_url, 'allow_comments':'1'})
                 logger.info("Updated Thread with Title, Slug and URL for %s" % post['title'])
                 logger.info("Updating comments on disqus for %s" % post['title'])
